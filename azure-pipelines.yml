@@ -28,7 +28,7 @@ steps:
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: '**/TEST-*.xml'
-      searchFolder: '$(System.DefaultWorkingDirectory)'
+      searchFolder: '$(Agent.BuildDirectory)'
       testRunTitle: 'JUnit Test Results'
 
 #trigger:
