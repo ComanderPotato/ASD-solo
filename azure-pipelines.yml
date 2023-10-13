@@ -1,9 +1,5 @@
 # Maven
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
-    mergeTestResults: true
+
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
@@ -29,13 +25,17 @@ steps:
       ArtifactName: 'drop'
       publishLocation: 'Container'
 
+  # - task: PublishTestResults@2
+  #   inputs:
+  #     testResultsFormat: 'JUnit'
+  #     testResultsFiles: '**/TEST-*.xml'
+  #     searchFolder: '$(Agent.BuildDirectory)'
+  #     testRunTitle: 'JUnit Test Results'
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: '**/TEST-*.xml'
-      searchFolder: '$(Agent.BuildDirectory)'
-      testRunTitle: 'JUnit Test Results'
-
+      mergeTestResults: true
 #trigger:
 #  - main
 #
