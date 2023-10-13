@@ -12,9 +12,6 @@ steps:
   - script: echo "Starting Build and Test"
     displayName: 'Starting Build and Test'
 
-  - task: UseJavaVersion@0
-    inputs:
-      versionSpec: '11'  # Use the Java version you need
 
   - script: mvn clean package
     displayName: 'Build the Java Project'
