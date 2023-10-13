@@ -10,6 +10,7 @@
 <head>
     <title>$Title$</title>
     <link rel="stylesheet" href="./styles/global.css">
+    <link rel="stylesheet" href="./styles/viewSpots.css">
     <link rel="stylesheet" href="./styles/navbar.css">
     <link rel="stylesheet" href="./styles/navbar.css">
 </head>
@@ -17,7 +18,91 @@
 <main>
     <%@include file="navbar.jsp"%>
     <div class="main-view-spots">
+        <div class="spots-container">
+            <div class="spots-container--header">
+                <div class="form-group">
+                    <label for="suburb">Filter by suburb:</label>
+                    <input
+                            type="text"
+                            id="suburb"
+                            name="suburb"
+                            required
+                    />
+                </div>
 
+            </div>
+            <div class="spots-container--content">
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+
+                </div>
+                <div class="spots-container--spot">
+                    <h2>Suburb name</h2>
+                    <h3>Price</h3>
+                    <button class="CTA CTA--primary">Book now</button>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 </body>

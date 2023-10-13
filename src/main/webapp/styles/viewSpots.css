@@ -1,0 +1,27 @@
+.main-view-spots {
+    height: 90vh;
+    padding: 0 20rem;
+}
+
+.spots-container {
+    background-color: white;
+    padding: 2rem;
+}
+.spots-container--content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content;
+    gap: 1rem;
+}
+.spots-container--header {
+    padding-bottom: 2rem;
+}
+.spots-container--spot {
+    background-color: #efefef;
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: 400ms all ease-in-out;
+}
+.spots-container--spot:hover {
+    background-color: white;
+}
