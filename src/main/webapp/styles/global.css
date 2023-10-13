@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 62.5%;
+}
+.CTA {
+    border: none;
+    padding: 1.4rem 3.2rem;
+    /* font-size: 2remrem; */
+    transition: 400ms all ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+}
+.CTA--primary {
+    background-color: red;
+    color: white;
+    border: red solid 1px;
+}
+.CTA--primary:hover {
+    background-color: white;
+    color: red;
+}
+.CTA--secondary {
+    border: red solid 1px;
+    background-color: white;
+    color: red;
+}
+.CTA--secondary:hover {
+    background-color: red;
+    color: white;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+}
+.form-group > input {
+    height: 3rem;
+    width: 30rem;
+}

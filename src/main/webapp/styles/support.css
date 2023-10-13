@@ -1,0 +1,16 @@
+.main {
+    height: 90vh;
+    display: grid;
+    place-content: center;
+}
+.support-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: white;
+    padding: 4rem;
+    border-radius: 1rem;
+}
+textarea {
+    resize: none;
+}

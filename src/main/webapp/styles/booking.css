@@ -1,0 +1,47 @@
+
+.booking-banner {
+    height: 10rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 2.4rem;
+    padding: 1.8rem 20rem;
+}
+select {
+    height: 3rem;
+    width: 15rem;
+}
+.booking-banner h1 {
+    margin: 0;
+}
+.booking-form--heading {
+    padding: 1.8rem 1rem;
+}
+.booking-form--heading h2 {
+    font-size: 2rem;
+}
+.booking-form--heading p {
+    font-size: 1.8rem;
+}
+.form-group--booking {
+    display: flex;
+    gap: 5rem;
+}
+.form-group--booking {
+    padding-bottom: 10rem;
+}
+.adjacent--booking {
+    display: flex;
+    gap: 2rem;
+}
+.booking-time {
+    justify-content: space-between;
+}
+.form--booking {
+    padding: 0 20rem;
+}
+.form-group {
+    gap: 1.8rem;
+}
+.form--booking-button {
+    display: flex;
+    justify-content: end;
+}
