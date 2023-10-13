@@ -3,27 +3,6 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
-#trigger:
-#  - main
-#
-#pool:
-#  vmImage: ubuntu-latest
-#
-#steps:
-#  - task: ArchiveFiles@2
-#    inputs:
-#      rootFolderOrFile: '$(Build.SourcesDirectory)'
-#      includeRootFolder: true
-#      archiveType: 'zip'
-#      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-#      replaceExistingArchive: true
-#
-#  - task: PublishBuildArtifacts@1
-#    inputs:
-#      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#      ArtifactName: 'drop'
-#      publishLocation: 'Container'
-
 trigger:
   - main
 
@@ -45,17 +24,38 @@ steps:
       ArtifactName: 'drop'
       publishLocation: 'Container'
 
-  - task: ExtractFiles@1
-    inputs:
-      archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/*.zip'
-      destinationFolder: '$(Build.SourcesDirectory)'
-
-#  - task: UseJavaVersion@0
+#trigger:
+#  - main
+#
+#pool:
+#  vmImage: ubuntu-latest
+#
+#steps:
+#  - task: ArchiveFiles@2
 #    inputs:
-#      versionSpec: '11'  # Use the Java version you need
-
-  - script: |
-      cd $(Build.SourcesDirectory)
-      mvn test
-    displayName: 'Run JUnit Tests'
+#      rootFolderOrFile: '$(Build.SourcesDirectory)'
+#      includeRootFolder: true
+#      archiveType: 'zip'
+#      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+#      replaceExistingArchive: true
+#
+#  - task: PublishBuildArtifacts@1
+#    inputs:
+#      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#      ArtifactName: 'drop'
+#      publishLocation: 'Container'
+#
+#  - task: ExtractFiles@1
+#    inputs:
+#      archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/*.zip'
+#      destinationFolder: '$(Build.SourcesDirectory)'
+#
+##  - task: UseJavaVersion@0
+##    inputs:
+##      versionSpec: '11'  # Use the Java version you need
+#
+#  - script: |
+#      cd $(Build.SourcesDirectory)
+#      mvn test
+#    displayName: 'Run JUnit Tests'
 
