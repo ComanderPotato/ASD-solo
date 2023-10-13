@@ -2,24 +2,53 @@
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
   - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-latest  # Choose an appropriate image
 
 steps:
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: '$(Build.SourcesDirectory)'
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-      replaceExistingArchive: true
+  - script: echo "Starting Build and Test"
+    displayName: 'Starting Build and Test'
 
-  - task: PublishBuildArtifacts@1
+  - task: UseJavaVersion@0
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: 'drop'
-      publishLocation: 'Container'
+      versionSpec: '11'  # Use the Java version you need
+
+  - script: mvn clean package
+    displayName: 'Build the Java Project'
+
+  - script: mvn test  # This command runs JUnit tests
+    displayName: 'Run Java Unit Tests'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'  # Use JUnit test results
+      testResultsFiles: '**/target/test-*.xml'  # Path to test result files
+      searchFolder: $(System.DefaultWorkingDirectory)
+
+  - script: echo "Completed Build and Test"
+    displayName: 'Completed Build and Test'
+#trigger:
+#  - main
+#
+#pool:
+#  vmImage: ubuntu-latest
+#
+#steps:
+#  - task: ArchiveFiles@2
+#    inputs:
+#      rootFolderOrFile: '$(Build.SourcesDirectory)'
+#      includeRootFolder: true
+#      archiveType: 'zip'
+#      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+#      replaceExistingArchive: true
+#
+#  - task: PublishBuildArtifacts@1
+#    inputs:
+#      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#      ArtifactName: 'drop'
+#      publishLocation: 'Container'
+
+

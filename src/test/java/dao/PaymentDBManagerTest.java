@@ -58,10 +58,12 @@ class PaymentDBManagerTest {
     @Test
     void addPayment() {
         try {
+            db.openConnection();
             paymentDBManager.resetPaymentDB();
             for(Payment payment : paymentList) {
                 paymentDBManager.addPayment(payment);
             }
+            db.closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -70,7 +72,7 @@ class PaymentDBManagerTest {
     @Test
     void removePayment() {
         try {
-
+        db.openConnection();
         Payment testPayment = new Payment(
                 3,
                 1,
@@ -85,6 +87,7 @@ class PaymentDBManagerTest {
         paymentDBManager.removePayment(testQuery.get(0).getId());
         ArrayList<Payment> deletedPayment = paymentDBManager.queryPayments(3);
         assertEquals(deletedPayment.size(), 0);
+        db.closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -93,12 +96,14 @@ class PaymentDBManagerTest {
     @Test
     void queryPayments() {
         try {
-        ArrayList<Payment> queriedPayments = paymentDBManager.queryPayments(2);
-        assertEquals(queriedPayments.get(0).getPaymentTypeId(), paymentThree.getPaymentTypeId());
-        assertEquals(queriedPayments.get(0).getName(), paymentThree.getName());
-        assertEquals(queriedPayments.get(0).getNumber(), paymentThree.getNumber());
-        assertEquals(queriedPayments.get(0).getExpiry(), paymentThree.getExpiry());
-        assertEquals(queriedPayments.get(0).getCvv(), paymentThree.getCvv());
+            db.openConnection();
+            ArrayList<Payment> queriedPayments = paymentDBManager.queryPayments(2);
+            assertEquals(queriedPayments.get(0).getPaymentTypeId(), paymentThree.getPaymentTypeId());
+            assertEquals(queriedPayments.get(0).getName(), paymentThree.getName());
+            assertEquals(queriedPayments.get(0).getNumber(), paymentThree.getNumber());
+            assertEquals(queriedPayments.get(0).getExpiry(), paymentThree.getExpiry());
+            assertEquals(queriedPayments.get(0).getCvv(), paymentThree.getCvv());
+            db.closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -108,6 +113,7 @@ class PaymentDBManagerTest {
     @Test
     void updatePayment() {
         try {
+            db.openConnection();
             String newName = "Tom Golding";
             ArrayList<Payment> queriedPayments = paymentDBManager.queryPayments(1);
             for(Payment payment : queriedPayments) {
@@ -118,6 +124,7 @@ class PaymentDBManagerTest {
             for(Payment payment : queriedPayments) {
                 assertEquals(payment.getName(), newName);
             }
+            db.closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

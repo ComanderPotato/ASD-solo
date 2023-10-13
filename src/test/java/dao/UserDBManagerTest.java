@@ -48,6 +48,7 @@ class UserDBManagerTest {
     void addUser() {
 
         try {
+            db.openConnection();
             userDBManager.resetUserDB();
             for(User user : usersList) {
                 userDBManager.addUser(user);

@@ -41,6 +41,7 @@ class SupportFormDBManagerTest {
     @Test
     void addSupportForm() {
         try {
+            db.openConnection();
             supportFormDBManager.resetSupportFormDB();
             for(SupportForm supportForm : supportFormList) {
                 supportFormDBManager.addSupportForm(supportForm);

@@ -17,10 +17,11 @@ public class SupportFormDBManager {
     }
     public void addSupportForm(SupportForm supportForm) throws SQLException {
         prepStmt = conn.prepareStatement("INSERT INTO SUPPORTFORM " +
-                "(EMAIL, MESSAGE)" +
-                "VALUES (?, ?)");
-        prepStmt.setString(1, supportForm.getEmail());
-        prepStmt.setString(1, supportForm.getMessage());
+                "(USERID, EMAIL, MESSAGE)" +
+                "VALUES (?, ?, ?)");
+        prepStmt.setInt(1, supportForm.getUserId());
+        prepStmt.setString(2, supportForm.getEmail());
+        prepStmt.setString(3, supportForm.getMessage());
         prepStmt.executeUpdate();
     }
     public ArrayList<SupportForm> querySupportForms() throws SQLException {

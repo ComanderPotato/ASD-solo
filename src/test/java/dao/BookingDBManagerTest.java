@@ -61,6 +61,7 @@ class BookingDBManagerTest {
     @Test
     void addBooking() {
         try {
+            db.openConnection();
             bookingDBManager.resetBookingDB();
             for(Booking booking : bookingList) {
                 bookingDBManager.addBooking(booking);
@@ -74,7 +75,7 @@ class BookingDBManagerTest {
     @Test
     void removeBooking() {
         try {
-
+            db.openConnection();
             Booking testBooking = new Booking(
                     3,
                     4,
@@ -90,6 +91,7 @@ class BookingDBManagerTest {
             bookingDBManager.removeBooking(testQuery.get(0).getId());
             ArrayList<Booking> deletedPayment = bookingDBManager.queryBookingsByUserID(3);
             assertEquals(deletedPayment.size(), 0);
+            db.closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -98,19 +100,20 @@ class BookingDBManagerTest {
     @Test
     void updateBooking() {
         try {
-        LocalTime newExitTime = LocalTime.of(18, 15);
-        ArrayList<Booking> queriedBooking = bookingDBManager.queryBookingsByUserID(2);
-        for(Booking booking : queriedBooking) {
-            booking.setExitTime(newExitTime);
-            bookingDBManager.updateBooking(booking);
-        }
-        ArrayList<Booking> updatedBookings = bookingDBManager.queryBookingsByUserID(2);
-        for(Booking booking : updatedBookings) {
-            assertEquals(booking.getExitTime(), newExitTime);
-            booking.setExitTime(LocalTime.of(10, 15));
-            bookingDBManager.updateBooking(booking);
-        }
-
+            db.openConnection();
+            LocalTime newExitTime = LocalTime.of(18, 15);
+            ArrayList<Booking> queriedBooking = bookingDBManager.queryBookingsByUserID(2);
+            for(Booking booking : queriedBooking) {
+                booking.setExitTime(newExitTime);
+                bookingDBManager.updateBooking(booking);
+            }
+            ArrayList<Booking> updatedBookings = bookingDBManager.queryBookingsByUserID(2);
+            for(Booking booking : updatedBookings) {
+                assertEquals(booking.getExitTime(), newExitTime);
+                booking.setExitTime(LocalTime.of(10, 15));
+                bookingDBManager.updateBooking(booking);
+            }
+        db.closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -119,16 +122,17 @@ class BookingDBManagerTest {
     @Test
     void queryBookings() {
         try {
-        ArrayList<Booking> queriedBookings = bookingDBManager.queryBookings();
-        for(int i = 0; i < queriedBookings.size(); i++) {
-//            assertEquals(queriedBookings.get(i).getId(), bookingList.get(i).getId());
-            assertEquals(queriedBookings.get(i).getUserId(), bookingList.get(i).getUserId());
-            assertEquals(queriedBookings.get(i).getPaymentID(), bookingList.get(i).getPaymentID());
-            assertEquals(queriedBookings.get(i).getarrivalTimeAsString(), bookingList.get(i).getarrivalTimeAsString());
-            assertEquals(queriedBookings.get(i).getArrivalDateAsString(), bookingList.get(i).getArrivalDateAsString());
-            assertEquals(queriedBookings.get(i).getExitTimeAsString(), bookingList.get(i).getExitTimeAsString());
-            assertEquals(queriedBookings.get(i).getExitDateAsString(), bookingList.get(i).getExitDateAsString());
-        }
+            db.openConnection();
+            ArrayList<Booking> queriedBookings = bookingDBManager.queryBookings();
+            for(int i = 0; i < queriedBookings.size(); i++) {
+                assertEquals(queriedBookings.get(i).getUserId(), bookingList.get(i).getUserId());
+                assertEquals(queriedBookings.get(i).getPaymentID(), bookingList.get(i).getPaymentID());
+                assertEquals(queriedBookings.get(i).getarrivalTimeAsString(), bookingList.get(i).getarrivalTimeAsString());
+                assertEquals(queriedBookings.get(i).getArrivalDateAsString(), bookingList.get(i).getArrivalDateAsString());
+                assertEquals(queriedBookings.get(i).getExitTimeAsString(), bookingList.get(i).getExitTimeAsString());
+                assertEquals(queriedBookings.get(i).getExitDateAsString(), bookingList.get(i).getExitDateAsString());
+            }
+            db.closeConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

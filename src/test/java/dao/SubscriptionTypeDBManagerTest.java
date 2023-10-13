@@ -44,7 +44,7 @@ class SubscriptionTypeDBManagerTest {
     @Test
     void querySubscriptionTypeById() {
         try {
-
+        db.openConnection();
         SubscriptionType one = subscriptionTypeDBManager.querySubscriptionTypeById(1);
         assertEquals(one.getType(), subTypeOne.getType());
         assertEquals(one.getPrice(), subTypeOne.getPrice());
@@ -56,6 +56,7 @@ class SubscriptionTypeDBManagerTest {
         SubscriptionType three = subscriptionTypeDBManager.querySubscriptionTypeById(3);
         assertEquals(three.getType(), subTypeThree.getType());
         assertEquals(three.getPrice(), subTypeThree.getPrice());
+        db.closeConnection();
         } catch (SQLException e) {
 
         }
@@ -64,11 +65,13 @@ class SubscriptionTypeDBManagerTest {
     @Test
     void querySubscriptionTypes() {
         try {
+            db.openConnection();
             ArrayList<SubscriptionType> queriedTypes = subscriptionTypeDBManager.querySubscriptionTypes();
             for(int i = 0; i < queriedTypes.size(); i++) {
                 assertEquals(queriedTypes.get(i).getType(), subscriptionTypesList.get(i).getType());
                 assertEquals(queriedTypes.get(i).getPrice(), subscriptionTypesList.get(i).getPrice());
             }
+            db.closeConnection();
         } catch (SQLException e) {
 
         }

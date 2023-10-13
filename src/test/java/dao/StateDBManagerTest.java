@@ -53,7 +53,7 @@ class StateDBManagerTest {
     @Test
     void queryStateById() {
         try {
-
+        db.openConnection();
         State one = stateDBManager.queryStateById(1);
         assertEquals(one.getState(), stateOne.getState());
         State two = stateDBManager.queryStateById(2);
@@ -66,6 +66,7 @@ class StateDBManagerTest {
         assertEquals(five.getState(), stateFive.getState());
         State six = stateDBManager.queryStateById(6);
         assertEquals(six.getState(), stateSix.getState());
+        db.closeConnection();
         } catch (SQLException e) {
 
         }
@@ -75,10 +76,12 @@ class StateDBManagerTest {
     @Test
     void queryStates() {
         try {
+            db.openConnection();
             ArrayList<State> queriedTypes = stateDBManager.queryStates();
             for(int i = 0; i < queriedTypes.size(); i++) {
                 assertEquals(queriedTypes.get(i).getState(), stateList.get(i).getState());
             }
+            db.closeConnection();
         } catch (SQLException e) {
 
         }
