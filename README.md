@@ -20,3 +20,11 @@ https://projects.eclipse.org/projects/ee4j.glassfish/releases/7.0.3
 
 Download db browser
 https://sqlitebrowser.org/dl/
+
+## Running application (I think, I'm not too sure)
+*1)
+Once repo is cloned or zip file it opened. Type mvn clean install in terminal
+
+*2)
+If using intelij you should be able to edit the glassfish configuration to run. Or type asadmin start-domain in console.
+
