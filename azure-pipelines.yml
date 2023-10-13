@@ -50,9 +50,9 @@ steps:
       archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/*.zip'
       destinationFolder: '$(Build.SourcesDirectory)'
 
-  - task: UseJavaVersion@0
-    inputs:
-      versionSpec: '11'  # Use the Java version you need
+#  - task: UseJavaVersion@0
+#    inputs:
+#      versionSpec: '11'  # Use the Java version you need
 
   - script: |
       cd $(Build.SourcesDirectory)
