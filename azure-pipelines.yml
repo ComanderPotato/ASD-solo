@@ -32,23 +32,23 @@ steps:
   #     testResultsFiles: '**/TEST-*.xml'
   #     searchFolder: '$(Agent.BuildDirectory)'
   #     testRunTitle: 'JUnit Test Results'
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: '**/TEST-*.xml'
-      mergeTestResults: true
+  # - task: PublishTestResults@2
+  #   inputs:
+  #     testResultsFormat: 'JUnit'
+  #     testResultsFiles: '**/TEST-*.xml'
+  #     mergeTestResults: true
       
-  - task: Maven@4
-    inputs:
-      mavenPomFile: 'pom.xml'
-      goals: 'test'
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      javaHomeOption: 'JDKVersion'
-      mavenVersionOption: 'Default'
-      mavenAuthenticateFeed: false
-      effectivePomSkip: false
-      sonarQubeRunAnalysis: false
+  # - task: Maven@4
+  #   inputs:
+  #     mavenPomFile: 'pom.xml'
+  #     goals: 'test'
+  #     publishJUnitResults: true
+  #     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+  #     javaHomeOption: 'JDKVersion'
+  #     mavenVersionOption: 'Default'
+  #     mavenAuthenticateFeed: false
+  #     effectivePomSkip: false
+  #     sonarQubeRunAnalysis: false
 #trigger:
 #  - main
 #
