@@ -17,6 +17,7 @@ public class UserDBManager {
         stmt = conn.createStatement();
         this.conn = conn;
     }
+    // Queries all users within the database.
     public ArrayList<User> queryUsers() throws SQLException {
         prepStmt = conn.prepareStatement("SELECT * FROM USER");
         rs = prepStmt.executeQuery();
@@ -41,6 +42,7 @@ public class UserDBManager {
         }
         return users;
     }
+    // Checks if the user exists based on the input email, and password.
     public boolean authenticateUser(String email, String password) throws SQLException {
         prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE EMAIL = ? AND PASSWORD = ?");
         prepStmt.setString(1, email);
@@ -49,12 +51,14 @@ public class UserDBManager {
 
         return rs.next() ? true : false;
     }
+    // Checks if a user exists in the database based on the input email.
     public boolean userExists(String email) throws SQLException {
         prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE EMAIL = ?");
         prepStmt.setString(1, email);
         rs = prepStmt.executeQuery();
         return rs.next() ? true : false;
     }
+    // Adds the user to the database with necessary fields.
     public void addUser(User user) throws SQLException {
         prepStmt = conn.prepareStatement("INSERT INTO USER " +
                 "(EMAIL, PASSWORD, FIRSTNAME, LASTNAME, DOB, PHONENUMBER, ISADMIN)" +
@@ -73,6 +77,8 @@ public class UserDBManager {
         prepStmt.setInt(1, ID);
         prepStmt.executeUpdate();
     }
+    // Queries the database user table for users that have the input email and password, and returns the user if
+    // // the user exists. else returns null.
     public User findUser(String email, String password) throws SQLException {
         prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE EMAIL = ? AND PASSWORD = ?");
         prepStmt.setString(1, email);
@@ -80,17 +86,22 @@ public class UserDBManager {
 
         return getUser();
     }
+    // Queries the database user table for users that have the input id, and returns the user if
+    // // the user exists. else returns null.
     public User findUserByID(int ID) throws SQLException {
         prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE ID = ?");
         prepStmt.setInt(1, ID);
         return getUser();
     }
-
+    // Queries the database user table for users that have the input email, and returns the user if
+    // // the user exists. else returns null.
     public User findUserByEmail(String email) throws SQLException {
         prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE email = ?");
         prepStmt.setString(1, email);
         return getUser();
     }
+
+    // Simple getUser for database information
     private User getUser() throws SQLException {
         rs = prepStmt.executeQuery();
         if(rs.next()) {

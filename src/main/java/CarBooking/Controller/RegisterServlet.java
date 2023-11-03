@@ -14,6 +14,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class RegisterServlet extends HttpServlet {
+
+    // Retrieves the user information from the register modal. First validates the inputs follow the specific criteria.
+    // If they dont, it gets returned with necessary fields that are wrong. Else, it checks if the user does exists,
+    // If the user exists, it will return to the register modal stating that the user exists. The user details will be
+    // logged in the database and signed in.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

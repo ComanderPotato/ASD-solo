@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class EditUserServlet extends HttpServlet {
+    // Retreives all input information form the edit user modal. First it checks whether the inputs are valid or not. If not, returns
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)   throws ServletException, IOException {
         HttpSession session = request.getSession();

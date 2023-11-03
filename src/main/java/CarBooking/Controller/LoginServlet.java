@@ -6,11 +6,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import CarBooking.Controller.PasswordEncrypterDecrypter;
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginServlet extends HttpServlet {
+
+    // Retrieves the user information from the login modal. First validates the inputs follow the specific criteria.
+    // If they dont, it gets returned with necessary fields that are wrong. Else, it checks if the user does exists,
+    // If the user exists, it will try and find the user within the database. Else returns and states that the user
+    // doesnt exist.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)   throws ServletException, IOException {
         HttpSession session = request.getSession();
