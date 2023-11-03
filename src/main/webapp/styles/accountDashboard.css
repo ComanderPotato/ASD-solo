@@ -1,0 +1,270 @@
+.main-account {
+    min-height: 80vh;
+    max-height: 80vh;
+    padding: 0 20rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.account-nav {
+    background-color: #efefef;
+    padding: 2rem 10rem;
+    max-height: 10vh;
+}
+.account-nav > nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+.grid-section {
+    border-radius: 1rem;
+    background-color: white;
+}
+.account-info {
+
+}
+.account-orders {
+    /*padding: 1rem;*/
+}
+.list-container {
+    min-height: 80vh;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: scroll;
+    padding: 1rem;
+}
+.list-item {
+    background-color: #efefef;
+    border-radius: .8rem;
+    min-height: max-content;
+    padding: 1rem;
+    transition: 400ms ease-in-out all;
+    display: grid;
+    place-content: center;
+    position: relative;
+}
+.list-item:hover {
+    background-color: #d2d2d2;
+}
+
+.payment-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+}
+.icon-plus {
+    pointer-events: none;
+}
+
+.card-info {
+    background-color: white;
+    border-radius: .8rem;
+    padding: 1rem;
+    width: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.card-name span,
+.card-number span,
+.card-expiry span,
+.card-cvv span {
+    display: block;
+    font-size: 16px;
+}
+
+.add-payment {
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+
+
+/*--------------------
+Credit Card
+--------------------*/
+.credit-card-box {
+    /*height: 280px;*/
+    /*position: absolute;*/
+    /*width: 400px;*/
+    /*height: 280px;*/
+}
+.credit-card-box:hover .flip,
+.credit-card-box.hover .flip {
+     transform: rotateY(180deg);
+ }
+
+.credit-card-box .front,
+.credit-card-box .back {
+    width: 400px;
+    height: 250px;
+    border-radius: 15px;
+
+    backface-visibility: hidden;
+    background: linear-gradient(135deg, #bd6772, #53223f);
+    color: #fff;
+    font-family: Inconsolata;
+    top: 0;
+    left: 0;
+}
+.back {
+    position: absolute;
+}
+.front::before, .back::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url('http://cdn.flaticon.com/svg/44/44386.svg') no-repeat center;
+    background-size: cover;
+    opacity: .05;
+}
+
+.flip {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 9px;
+    right: 20px;
+    width: 60px;
+}
+.logo svg {
+    width: 100%;
+    height: auto;
+    fill: #fff;
+}
+
+.front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+.back .logo {
+    top: 185px;
+}
+
+.chip {
+    position: absolute;
+    width: 60px;
+    height: 45px;
+    top: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, hsl(269, 54%, 87%) 0%, hsl(200, 64%, 89%) 44%, hsl(18, 55%, 94%) 100%);;
+    border-radius: 8px;
+}
+.chip::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     margin: auto;
+     width: 80%;
+     height: 70%;
+     border-radius: 5px;
+}
+
+.strip {
+    background: black;
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    top: 30px;
+    left: 0;
+}
+
+.number {
+    position: absolute;
+    margin: 0 auto;
+    top: 103px;
+    left: 19px;
+    font-size: 38px;
+}
+
+label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-shadow: none;
+    text-transform: uppercase;
+    font-weight: normal;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.card-holder,
+.card-expiration-date {
+    position: absolute;
+    margin: 0 auto;
+    top: 180px;
+    left: 19px;
+    font-size: 22px;
+    text-transform: capitalize;
+}
+
+.card-expiration-date {
+    text-align: right;
+    left: auto;
+    right: 20px;
+}
+
+.ccv {
+    height: 36px;
+    background: #fff;
+    width: 91%;
+    border-radius: 5px;
+    top: 110px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin: 0 auto;
+    color: #000;
+    text-align: right;
+    padding: 10px;
+}
+.cvv label {
+    margin: -25px 0 14px;
+    color: #fff;
+}
+.the-most {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 50vw;
+    max-width: 200px;
+    padding: 10px;
+}
+.the-most img {
+    max-width: 100%;
+}
+
+.payment-buttons {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+}
+.payment-icon {
+    cursor: pointer;
+}
+.payment-button {
+    border: none;
+    background-color: transparent;
+    transition: 400ms ease-in-out all;
+}
+.payment-button:hover {
+    transform: scale(1.05);
+}

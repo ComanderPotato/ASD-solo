@@ -71,6 +71,15 @@ public class Payment implements Serializable {
     public String getNumber() {
         return number;
     }
+    public String getNumberObscured() {
+        String obscured = number.replaceAll("^\\d{1,12}", "************");
+        String formatted = obscured.replaceAll("(.{4})", "$1 ");
+        return formatted.substring(0, formatted.length() - 1);
+    }
+    public String getNumberFormatted() {
+        String formatted = number.replaceAll("(.{4})", "$1 ");
+        return formatted.substring(0, formatted.length() - 1);
+    }
 
     public void setNumber(String number) {
         this.number = number;
@@ -91,4 +100,5 @@ public class Payment implements Serializable {
     public void setCvv(String cvv) {
         this.cvv = cvv;
     }
+
 }

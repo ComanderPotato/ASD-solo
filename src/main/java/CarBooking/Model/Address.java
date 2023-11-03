@@ -5,17 +5,15 @@ import java.io.Serializable;
 public class Address implements Serializable {
     private int id;
     private int stateId;
-    private String unitNumber;
     private String streetNumber;
     private String addressLine;
     private String suburb;
     private String city;
     private String postCode;
 
-    public Address(int id, int stateId, String unitNumber, String streetNumber, String addressLine, String suburb, String city, String postCode) {
+    public Address(int id, int stateId, String streetNumber, String addressLine, String suburb, String city, String postCode) {
         this.id = id;
         this.stateId = stateId;
-        this.unitNumber = unitNumber;
         this.streetNumber = streetNumber;
         this.addressLine = addressLine;
         this.suburb = suburb;
@@ -23,9 +21,8 @@ public class Address implements Serializable {
         this.postCode = postCode;
     }
 
-    public Address(int stateId, String unitNumber, String streetNumber, String addressLine, String suburb, String city, String postCode) {
+    public Address(int stateId, String streetNumber, String addressLine, String suburb, String city, String postCode) {
         this.stateId = stateId;
-        this.unitNumber = unitNumber;
         this.streetNumber = streetNumber;
         this.addressLine = addressLine;
         this.suburb = suburb;
@@ -33,8 +30,7 @@ public class Address implements Serializable {
         this.postCode = postCode;
     }
 
-    public Address(String unitNumber, String streetNumber, String addressLine, String suburb, String city, String postCode) {
-        this.unitNumber = unitNumber;
+    public Address(String streetNumber, String addressLine, String suburb, String city, String postCode) {
         this.streetNumber = streetNumber;
         this.addressLine = addressLine;
         this.suburb = suburb;
@@ -56,14 +52,6 @@ public class Address implements Serializable {
 
     public void setStateId(int stateId) {
         this.stateId = stateId;
-    }
-
-    public String getUnitNumber() {
-        return unitNumber;
-    }
-
-    public void setUnitNumber(String unitNumber) {
-        this.unitNumber = unitNumber;
     }
 
     public String getStreetNumber() {

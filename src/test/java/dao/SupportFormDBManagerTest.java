@@ -44,7 +44,7 @@ class SupportFormDBManagerTest {
             db.openConnection();
             supportFormDBManager.resetSupportFormDB();
             for(SupportForm supportForm : supportFormList) {
-                supportFormDBManager.addSupportForm(supportForm);
+                supportFormDBManager.addSupportFormWithId(supportForm);
             }
             db.closeConnection();
         } catch(SQLException e) {
@@ -54,6 +54,17 @@ class SupportFormDBManagerTest {
 
     @Test
     void querySupportForms() {
+        try {
+            ArrayList<SupportForm> queriedForms = supportFormDBManager.querySupportForms();
+            assertEquals(queriedForms.size(), supportFormList.size());
+            for(int i = 0; i < queriedForms.size(); i++) {
+                assertEquals(queriedForms.get(i).getUserId(), supportFormList.get(i).getUserId());
+                assertEquals(queriedForms.get(i).getEmail(), supportFormList.get(i).getEmail());
+                assertEquals(queriedForms.get(i).getMessage(), supportFormList.get(i).getMessage());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -63,11 +74,22 @@ class SupportFormDBManagerTest {
     }
     @Test
     void findSupportFormsByEmail() {
-
+        try {
+            ArrayList<SupportForm> formsByEmail = supportFormDBManager.findSupportFormsByEmail(supportFormOne.getEmail());
+            assertEquals(formsByEmail.get(0).getUserId(), supportFormOne.getUserId());
+            assertEquals(formsByEmail.get(0).getEmail(), supportFormOne.getEmail());
+            assertEquals(formsByEmail.get(0).getMessage(), supportFormOne.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Test
-    void findSupportFormById() {
-
+    void findSupportFormByUserId() {
+//        try {
+//            supportFormDBManager.
+//        } catch (SQLException e) {
+//
+//        }
     }
 
 }

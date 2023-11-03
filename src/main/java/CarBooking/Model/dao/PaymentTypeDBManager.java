@@ -1,5 +1,6 @@
 package CarBooking.Model.dao;
 
+import CarBooking.Model.Payment;
 import CarBooking.Model.PaymentType;
 import CarBooking.Model.User;
 
@@ -18,7 +19,7 @@ public class PaymentTypeDBManager {
         this.conn = conn;
     }
     public ArrayList<PaymentType> queryPaymentTypes() throws SQLException {
-        prepStmt = conn.prepareStatement("SELECT * FROM PAYMENTTYPES");
+        prepStmt = conn.prepareStatement("SELECT * FROM PAYMENTTYPE");
         rs = prepStmt.executeQuery();
         ArrayList<PaymentType> paymentTypes = new ArrayList<>();
         while(rs.next()) {
@@ -29,7 +30,7 @@ public class PaymentTypeDBManager {
         return paymentTypes;
     }
     public PaymentType getPaymentTypeById(int id) throws SQLException {
-        prepStmt = conn.prepareStatement("SELECT * FROM PAYMENTTYPES WHERE ID = ?");
+        prepStmt = conn.prepareStatement("SELECT * FROM PAYMENTTYPE WHERE ID = ?");
         prepStmt.setInt(1, id);
         rs = prepStmt.executeQuery();
         if(rs.next()) {

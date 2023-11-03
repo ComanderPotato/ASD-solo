@@ -1,5 +1,7 @@
 package CarBooking.Model;
 
+import CarBooking.Controller.Formatter;
+import CarBooking.Controller.PasswordEncrypterDecrypter;
 import java.time.LocalDate;
 
 public class User {
@@ -12,6 +14,7 @@ public class User {
     private LocalDate DOB;
     private String phoneNumber;
     private boolean isAdmin;
+    private static final String ADMIN_CODE = "ADMIN123";
     public User(int id, int subscriptionTypeId, String email, String password, String firstName, String lastName, LocalDate DOB, String phoneNumber, boolean isAdmin) {
         this.id = id;
         this.subscriptionTypeId = subscriptionTypeId;
@@ -26,7 +29,11 @@ public class User {
     public User(int subscriptionTypeId, String email, String password, String firstName, String lastName, LocalDate DOB, String phoneNumber, boolean isAdmin) {
         this.subscriptionTypeId = subscriptionTypeId;
         this.email = email;
-        this.password = password;
+        try {
+            this.password = PasswordEncrypterDecrypter.decrypt(password);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         this.firstName = firstName;
         this.lastName = lastName;
         this.DOB = DOB;
@@ -34,6 +41,15 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public User(String email, String password, String firstName, String lastName, LocalDate DOB, String phoneNumber, String adminCode) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.DOB = DOB;
+        this.phoneNumber = phoneNumber;
+        this.isAdmin = adminCode.equals(ADMIN_CODE) ? true : false;
+    }
     public User(String email, String password, String firstName, String lastName, LocalDate DOB, String phoneNumber, boolean isAdmin) {
         this.email = email;
         this.password = password;
@@ -93,9 +109,12 @@ public class User {
     }
 
     public LocalDate getDOB() {
+
         return DOB;
     }
-    public String getDOBAsString() { return DOB.toString(); }
+    public String getDOBAsString() {
+        return Formatter.formatDob(DOB);
+    }
     public void setDOB(LocalDate DOB) {
         this.DOB = DOB;
     }
@@ -115,4 +134,5 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
 }

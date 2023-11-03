@@ -7,7 +7,13 @@ public class SupportForm implements Serializable {
     private int userId;
     private String email;
     private String message;
-
+    private User user;
+    public SupportForm(int id, User user, String email, String message) {
+        this.id = id;
+        this.user = user;
+        this.email = email;
+        this.message = message;
+    }
     public SupportForm(int id, int userId, String email, String message) {
         this.id = id;
         this.userId = userId;
@@ -56,5 +62,13 @@ public class SupportForm implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

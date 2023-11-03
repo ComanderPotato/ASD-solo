@@ -1,0 +1,65 @@
+.main-admin {
+    min-height: 80vh;
+    max-height: 80vh;
+    padding: 0 20rem;
+    gap: 1rem;
+}
+.admin-nav {
+    background-color: #efefef;
+    padding: 2rem 10rem;
+    max-height: 10vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+    background-color: white;
+    padding: 1rem;
+    gap: 1rem;
+}
+.admin-grid--item {
+    position: relative;
+    background-color: #efefef;
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: 400ms ease-in-out all;
+    cursor: pointer;
+}
+.admin-grid--item:hover {
+    background-color: #d2d2d2;
+}
+.admin-user--controls {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    z-index: 2;
+
+}
+.main-admin-spots {
+
+}
+.main-admin-users {
+
+}
+.main-admin-forms {
+
+}
+.main-admin-spots--header {
+
+}
+.main-admin-users--header {
+
+}
+.main-admin-forms--header {
+
+}
+.main-admin-spots--content {
+
+}
+.main-admin-users--content {
+
+}
+.main-admin-forms--content {
+
+}

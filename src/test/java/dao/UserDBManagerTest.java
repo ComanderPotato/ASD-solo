@@ -44,6 +44,10 @@ class UserDBManagerTest {
             throw new RuntimeException(e);
         }
     }
+
+    UserDBManagerTest() throws Exception {
+    }
+
     @Test
     void addUser() {
 

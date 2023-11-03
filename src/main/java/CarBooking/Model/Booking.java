@@ -1,4 +1,6 @@
 package CarBooking.Model;
+import CarBooking.Controller.Formatter;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,8 +16,9 @@ public class Booking implements Serializable {
     private LocalTime arrivalTime;
     private LocalDate exitDate;
     private LocalTime exitTime;
+    private LocalDateTime dateBooked;
 
-    public Booking(int id, int userId, int carSpotID, int paymentID, double total, LocalDate arrivalDate, LocalTime arrivalTime, LocalDate exitDate, LocalTime exitTime) {
+    public Booking(int id, int userId, int carSpotID, int paymentID, double total, LocalDate arrivalDate, LocalTime arrivalTime, LocalDate exitDate, LocalTime exitTime, LocalDateTime dateBooked) {
         this.id = id;
         this.userId = userId;
         this.carSpotID = carSpotID;
@@ -25,9 +28,10 @@ public class Booking implements Serializable {
         this.arrivalTime = arrivalTime;
         this.exitDate = exitDate;
         this.exitTime = exitTime;
+        this.dateBooked = dateBooked;
     }
 
-    public Booking(int userId, int carSpotID, int paymentID, double total, LocalDate arrivalDate, LocalTime arrivalTime, LocalDate exitDate, LocalTime exitTime) {
+    public Booking(int userId, int carSpotID, int paymentID, double total, LocalDate arrivalDate, LocalTime arrivalTime, LocalDate exitDate, LocalTime exitTime, LocalDateTime dateBooked) {
         this.userId = userId;
         this.carSpotID = carSpotID;
         this.paymentID = paymentID;
@@ -36,14 +40,16 @@ public class Booking implements Serializable {
         this.arrivalTime = arrivalTime;
         this.exitDate = exitDate;
         this.exitTime = exitTime;
+        this.dateBooked = dateBooked;
     }
 
-    public Booking(double total, LocalDate arrivalDate, LocalTime arrivalTime, LocalDate exitDate, LocalTime exitTime) {
+    public Booking(double total, LocalDate arrivalDate, LocalTime arrivalTime, LocalDate exitDate, LocalTime exitTime, LocalDateTime dateBooked) {
         this.total = total;
         this.arrivalDate = arrivalDate;
         this.arrivalTime = arrivalTime;
         this.exitDate = exitDate;
         this.exitTime = exitTime;
+        this.dateBooked = dateBooked;
     }
 
     public int getId() {
@@ -89,7 +95,9 @@ public class Booking implements Serializable {
     public LocalDate getArrivalDate() {
         return arrivalDate;
     }
-    public String getArrivalDateAsString() { return arrivalDate.toString(); }
+    public String getArrivalDateAsString() {
+        return Formatter.formatDate(arrivalDate);
+    }
 
 
     public void setArrivalDate(LocalDate arrivalDate) {
@@ -99,7 +107,9 @@ public class Booking implements Serializable {
     public LocalTime getArrivalTime() {
         return arrivalTime;
     }
-    public String getarrivalTimeAsString() { return arrivalTime.toString(); }
+    public String getarrivalTimeAsString() {
+        return Formatter.formatTime(arrivalTime);
+    }
 
 
     public void setArrivalTime(LocalTime arrivalTime) {
@@ -109,7 +119,9 @@ public class Booking implements Serializable {
     public LocalDate getExitDate() {
         return exitDate;
     }
-    public String getExitDateAsString() { return exitDate.toString(); }
+    public String getExitDateAsString() {
+        return Formatter.formatDate(exitDate);
+    }
     public void setExitDate(LocalDate exitDate) {
         this.exitDate = exitDate;
     }
@@ -117,10 +129,22 @@ public class Booking implements Serializable {
     public LocalTime getExitTime() {
         return exitTime;
     }
-    public String getExitTimeAsString() { return exitTime.toString(); }
+    public String getExitTimeAsString() {
+        return Formatter.formatTime(exitTime);
+    }
 
 
     public void setExitTime(LocalTime exitTime) {
         this.exitTime = exitTime;
+    }
+
+    public LocalDateTime getDateBooked() {
+        return dateBooked;
+    }
+    public String getDateBookedAsString() {
+        return Formatter.formatDateTime(dateBooked);
+    }
+    public void setDateBooked(LocalDateTime dateBooked) {
+        this.dateBooked = dateBooked;
     }
 }

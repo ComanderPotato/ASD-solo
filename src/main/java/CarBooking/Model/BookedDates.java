@@ -1,5 +1,7 @@
 package CarBooking.Model;
 
+import CarBooking.Controller.Formatter;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,19 +11,16 @@ public class BookedDates implements Serializable {
     private int id;
     private int carSpotId;
     private LocalDate date;
-    private LocalTime time;
 
-    public BookedDates(int id, int carSpotId, LocalDate date, LocalTime time) {
+    public BookedDates(int id, int carSpotId, LocalDate date) {
         this.id = id;
         this.carSpotId = carSpotId;
         this.date = date;
-        this.time = time;
     }
 
-    public BookedDates(int carSpotId, LocalDate date, LocalTime time) {
+    public BookedDates(int carSpotId, LocalDate date) {
         this.carSpotId = carSpotId;
         this.date = date;
-        this.time = time;
     }
 
     public int getId() {
@@ -43,18 +42,12 @@ public class BookedDates implements Serializable {
     public LocalDate getDate() {
         return date;
     }
-    public String getDateAsString() { return date.toString(); }
+    public String getDateAsString() {
+        return Formatter.formatDate(date);
+    }
 
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
-    public String getTimeAsString() { return time.toString(); }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
 }

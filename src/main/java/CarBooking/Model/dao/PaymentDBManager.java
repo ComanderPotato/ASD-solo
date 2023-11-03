@@ -1,7 +1,7 @@
 package CarBooking.Model.dao;
 
 import CarBooking.Model.Payment;
-import CarBooking.Model.User;
+
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -34,6 +34,11 @@ public class PaymentDBManager {
         prepStmt.setInt(1, id);
         prepStmt.executeUpdate();
     }
+    public void removeAllUserPayments(int userId) throws SQLException {
+        prepStmt = conn.prepareStatement("DELETE FROM PAYMENT WHERE USERID = ?");
+        prepStmt.setInt(1, userId);
+        prepStmt.executeUpdate();
+    }
     public ArrayList<Payment> queryPayments(int userId) throws SQLException {
         prepStmt = conn.prepareStatement("SELECT * FROM PAYMENT WHERE USERID = ?");
         prepStmt.setInt(1, userId);
@@ -63,6 +68,15 @@ public class PaymentDBManager {
         prepStmt.setString(5, updatedPayment.getExpiry());
         prepStmt.setString(6, updatedPayment.getCvv());
         prepStmt.executeUpdate();
+    }
+    public boolean paymentExists(Payment payment) throws SQLException {
+        prepStmt = conn.prepareStatement("SELECT * FROM PAYMENT WHERE USERID = ? AND NUMBER = ? AND EXPIRY = ? AND CVV = ?");
+        prepStmt.setInt(1, payment.getUserId());
+        prepStmt.setString(2, payment.getNumber());
+        prepStmt.setString(3, payment.getExpiry());
+        prepStmt.setString(4, payment.getCvv());
+        rs = prepStmt.executeQuery();
+        return rs.next() ? true : false;
     }
     public void resetPaymentDB() throws SQLException {
         stmt.executeUpdate("DROP TABLE PAYMENT");

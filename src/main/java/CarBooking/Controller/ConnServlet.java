@@ -1,8 +1,11 @@
 package CarBooking.Controller;
 
-import CarBooking.Model.dao.DBConnector;
-import CarBooking.Model.dao.SupportFormDBManager;
-import CarBooking.Model.dao.UserDBManager;
+
+import CarBooking.Model.Address;
+import CarBooking.Model.CarSpot;
+import CarBooking.Model.PaymentType;
+import CarBooking.Model.State;
+import CarBooking.Model.dao.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,16 +16,25 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet(name="ConnServlet", value="/ConnServlet")
-
-public class  ConnServlet extends HttpServlet {
+public class ConnServlet extends HttpServlet {
 
     private DBConnector db;
     private UserDBManager userManager;
-    private SupportFormDBManager supportManager;
+    private SupportFormDBManager supportFormManager;
+    private PaymentDBManager paymentManager;
+    private PaymentTypeDBManager paymentTypeManager;
+    private CarSpotDBManager carSpotManager;
+    private BookingDBManager bookingManager;
+    private AddressDBManager addressManager;
+    private StateDBManager stateManager;
+    private BookedDatesDBManager bookedDatesManager;
+
     private Connection conn;
     @Override
     public void init() {
@@ -36,16 +48,40 @@ public class  ConnServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        conn = db.openConnection();
+        conn =  db.openConnection();
+        ArrayList<State> states;
+        ArrayList<PaymentType> paymentTypes;
         try {
             userManager = new UserDBManager(conn);
-            supportManager = new SupportFormDBManager(conn);
+            supportFormManager = new SupportFormDBManager(conn);
+            paymentManager = new PaymentDBManager(conn);
+            paymentTypeManager = new PaymentTypeDBManager(conn);
+            carSpotManager = new CarSpotDBManager(conn);
+            bookingManager = new BookingDBManager(conn);
+            addressManager = new AddressDBManager(conn);
+            stateManager = new StateDBManager(conn);
+            bookedDatesManager = new BookedDatesDBManager(conn);
+            states = stateManager.queryStates();
+            paymentTypes = paymentTypeManager.queryPaymentTypes();
+            session.setAttribute("states", states);
+            session.setAttribute("paymentTypes", paymentTypes);
+
         } catch (SQLException ex) {
             Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //export the DB manager to the view-session (JSPs)
+
         session.setAttribute("userManager", userManager);
-//        session.setAttribute("isLoggedIn", false);
+        session.setAttribute("supportFormManager", supportFormManager);
+        session.setAttribute("paymentManager", paymentManager);
+        session.setAttribute("paymentTypeManager", paymentTypeManager);
+        session.setAttribute("carSpotManager", carSpotManager);
+        session.setAttribute("bookingManager", bookingManager);
+        session.setAttribute("addressManager", addressManager);
+        session.setAttribute("stateManager", stateManager);
+        session.setAttribute("bookedDatesManager", bookedDatesManager);
+        session.setAttribute("isLoginOpen", false);
+        session.setAttribute("isRegisterOpen", false);
+        session.setAttribute("isAddCarSpotModalOpen", false);
     }
     @Override
     public void destroy() {

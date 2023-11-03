@@ -1,4 +1,6 @@
-<%--
+<%@ page import="CarBooking.Model.State" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.time.LocalDate" %><%--
   Created by IntelliJ IDEA.
   User: tomgolding
   Date: 12/10/2023
@@ -12,6 +14,7 @@
     <link rel="stylesheet" href="./styles/global.css">
     <link rel="stylesheet" href="./styles/booking.css">
     <link rel="stylesheet" href="./styles/navbar.css">
+    <script src="./script/booking.js" defer></script>
 </head>
 <body>
 <main>
@@ -29,10 +32,15 @@
                 <div class="form-group">
                     <label for="state">State</label>
                     <select name="state" id="state">
-                        <option value="NSW">NSW</option>
-                        <option value="QLD">QLD</option>
-                        <option value="WA">WA</option>
-                        <option value="SA">SA</option>
+                        <%
+                            ArrayList<State> states = (ArrayList<State>) session.getAttribute("states");
+                            if(states != null)
+                                for(State state : states) {
+                        %>
+                        <option value="<%=state.getId()%>"><%=state.getState()%></option>
+                        <%
+                                }
+                        %>
                     </select>
                 </div>
                 <div class="form-group">
@@ -43,6 +51,15 @@
                             name="carPark"
                             required
                     />
+                    <input
+                            type="hidden"
+                            id="carParkId"
+                            name="carParkId"
+                            required
+                    />
+                    <div class="carPark-dropdown">
+
+                    </div>
                 </div>
             </div>
             <div class="form-group--booking booking-time">
@@ -54,6 +71,7 @@
                                 id="arrivalDate"
                                 name="arrivalDate"
                                 required
+                                min="<%=LocalDate.now()%>"
                         />
                     </div>
                     <div class="form-group">
@@ -74,6 +92,7 @@
                                 id="exitDate"
                                 name="arrivalDate"
                                 required
+                                min="<%=LocalDate.now().plusDays(1)%>"
                         />
                     </div>
                     <div class="form-group">

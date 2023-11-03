@@ -6,11 +6,18 @@
 .support-form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     background-color: white;
     padding: 4rem;
     border-radius: 1rem;
 }
 textarea {
     resize: none;
+}
+.support-count {
+    text-align: right;
+}
+#support-button:disabled {
+    background-color: #6a6a6a63;
+    border: #6a6a6a63 1px solid;
 }

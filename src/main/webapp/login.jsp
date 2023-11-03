@@ -21,20 +21,20 @@
             <a href="index.jsp">Back</a>
         </div>
         <div class="form-group">
-            <label for="emailLogin">Email:</label>
+            <label for="email">Email:</label>
             <input
                     type="email"
-                    id="emailLogin"
-                    name="emailLogin"
+                    id="email"
+                    name="email"
                     required
             />
         </div>
         <div class="form-group">
-            <label for="passwordLogin">Password:</label>
+            <label for="password">Password:</label>
             <input
                     type="password"
-                    id="passwordLogin"
-                    name="passwordLogin"
+                    id="password"
+                    name="password"
                     required
             />
         </div>

@@ -27,6 +27,58 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>CarBooking.Controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>CarBooking.Controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SupportServlet</servlet-name>
+        <servlet-class>CarBooking.Controller.SupportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddPaymentController</servlet-name>
+        <servlet-class>CarBooking.Controller.AddPaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountServlet</servlet-name>
+        <servlet-class>CarBooking.Controller.AccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePaymentController</servlet-name>
+        <servlet-class>CarBooking.Controller.DeletePaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSpotsServlet</servlet-name>
+        <servlet-class>CarBooking.Controller.ViewSpotsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterCarSpotsServlet</servlet-name>
+        <servlet-class>CarBooking.Controller.FilterCarSpotsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookingPicker</servlet-name>
+        <servlet-class>CarBooking.Controller.BookingPicker</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterBookedDatesController</servlet-name>
+        <servlet-class>CarBooking.Controller.FilterBookedDatesController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCarSpotController</servlet-name>
+        <servlet-class>CarBooking.Controller.AddCarSpotController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>CarBooking.Controller.AdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>CarBooking.Controller.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>CarBooking.Controller.DeleteUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -43,9 +95,61 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SupportServlet</servlet-name>
+        <url-pattern>/SupportServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPaymentController</servlet-name>
+        <url-pattern>/AddPaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/AccountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePaymentController</servlet-name>
+        <url-pattern>/DeletePaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSpotsServlet</servlet-name>
+        <url-pattern>/ViewSpotsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterCarSpotsServlet</servlet-name>
+        <url-pattern>/FilterCarSpotsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingPicker</servlet-name>
+        <url-pattern>/BookingPicker</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterBookedDatesController</servlet-name>
+        <url-pattern>/FilterBookedDatesController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCarSpotController</servlet-name>
+        <url-pattern>/AddCarSpotController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/AdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserServlet</servlet-name>
+        <url-pattern>/EditUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/DeleteUserServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            200
         </session-timeout>
     </session-config>
 </web-app>

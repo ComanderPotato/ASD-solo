@@ -25,3 +25,7 @@
 .spots-container--spot:hover {
     background-color: white;
 }
+.view-spots-form {
+    display: flex;
+
+}

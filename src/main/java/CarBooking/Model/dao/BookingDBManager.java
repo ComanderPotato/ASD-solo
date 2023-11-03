@@ -1,7 +1,7 @@
 package CarBooking.Model.dao;
 
 import CarBooking.Model.Booking;
-
+import CarBooking.Controller.Formatter;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,8 +20,8 @@ public class BookingDBManager {
     }
     public void addBooking(Booking booking) throws SQLException {
         prepStmt = conn.prepareStatement("INSERT INTO BOOKING " +
-                "(USERID, CARSPOTID, PAYMENTID, TOTAL, ARRIVALDATE, ARRIVALTIME, EXITDATE, EXITTIME)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                "(USERID, CARSPOTID, PAYMENTID, TOTAL, ARRIVALDATE, ARRIVALTIME, EXITDATE, EXITTIME, DATEBOOKED)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         prepStmt.setInt(1, booking.getUserId());
         prepStmt.setInt(2, booking.getCarSpotID());
         prepStmt.setInt(3, booking.getPaymentID());
@@ -30,6 +30,7 @@ public class BookingDBManager {
         prepStmt.setString(6, booking.getExitTimeAsString());
         prepStmt.setString(7, booking.getExitDateAsString());
         prepStmt.setString(8, booking.getExitTimeAsString());
+        prepStmt.setString(9, booking.getDateBookedAsString());
         prepStmt.executeUpdate();
     }
     public void removeBooking(int ID) throws SQLException {
@@ -55,23 +56,17 @@ public class BookingDBManager {
         ArrayList<Booking> bookings = new ArrayList<>();
         rs = prepStmt.executeQuery();
         while(rs.next()) {
-            DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm");
-
-            LocalDate arrivalDate = LocalDate.parse(rs.getString(6), formatDate);
-            LocalTime arrivalTime = LocalTime.parse(rs.getString(7), formatTime);
-            LocalDate exitDate = LocalDate.parse(rs.getString(8), formatDate);
-            LocalTime exitTime = LocalTime.parse(rs.getString(9), formatTime);
             bookings.add(new Booking(
                     rs.getInt(1),
                     rs.getInt(2),
                     rs.getInt(3),
                     rs.getInt(4),
                     rs.getDouble(5),
-                    arrivalDate,
-                    arrivalTime,
-                    exitDate,
-                    exitTime));
+                    Formatter.parseDate(rs.getString(6)),
+                    Formatter.parseTime(rs.getString(7)),
+                    Formatter.parseDate(rs.getString(8)),
+                    Formatter.parseTime(rs.getString(9)),
+                    Formatter.parseDateTime(rs.getString(10))));
         }
         return bookings;
     }
@@ -80,23 +75,17 @@ public class BookingDBManager {
         rs = prepStmt.executeQuery();
         ArrayList<Booking> bookings = new ArrayList<>();
         while(rs.next()) {
-            DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm");
-
-            LocalDate arrivalDate = LocalDate.parse(rs.getString(6), formatDate);
-            LocalTime arrivalTime = LocalTime.parse(rs.getString(7), formatTime);
-            LocalDate exitDate = LocalDate.parse(rs.getString(8), formatDate);
-            LocalTime exitTime = LocalTime.parse(rs.getString(9), formatTime);
             bookings.add(new Booking(
                     rs.getInt(1),
                     rs.getInt(2),
                     rs.getInt(3),
                     rs.getInt(4),
                     rs.getDouble(5),
-                    arrivalDate,
-                    arrivalTime,
-                    exitDate,
-                    exitTime));
+                    Formatter.parseDate(rs.getString(6)),
+                    Formatter.parseTime(rs.getString(7)),
+                    Formatter.parseDate(rs.getString(8)),
+                    Formatter.parseTime(rs.getString(9)),
+                    Formatter.parseDateTime(rs.getString(10))));
         }
         return bookings;
     }

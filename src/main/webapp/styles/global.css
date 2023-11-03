@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+    /*outline: red 1px dotted;*/
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
@@ -20,7 +24,7 @@ html {
     color: white;
     border: red solid 1px;
 }
-.CTA--primary:hover {
+.CTA--primary:hover:enabled {
     background-color: white;
     color: red;
 }
@@ -29,16 +33,37 @@ html {
     background-color: white;
     color: red;
 }
-.CTA--secondary:hover {
+.CTA--secondary:hover:enabled {
     background-color: red;
     color: white;
+}
+input[name="password"] {
+    padding-right: 4rem;
 }
 .form-group {
     display: flex;
     flex-direction: column;
     font-size: 2rem;
 }
+.form-group-password {
+    position: relative;
+}
 .form-group > input {
     height: 3rem;
     width: 30rem;
+}
+.CTA:disabled {
+    background-color: #6a6a6a63;
+    color: rgba(0, 0, 0, 0.34);
+    border: #6a6a6a63 1px solid;
+}
+button:disabled {
+    /*color: rgba(0, 0, 0, 0.34);*/
+    color: red;
+}
+.icon-eye {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    cursor: pointer;
 }

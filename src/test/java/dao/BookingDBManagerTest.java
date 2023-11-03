@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -26,7 +27,8 @@ class BookingDBManagerTest {
             LocalDate.of(2024, 3, 13),
             LocalTime.of(10, 15),
             LocalDate.of(2024, 3, 16),
-            LocalTime.of(10, 15));
+            LocalTime.of(10, 15),
+            LocalDateTime.of(2023, 11, 13, 14, 12));
     Booking bookingTwo = new Booking(
             1,
             4,
@@ -35,7 +37,8 @@ class BookingDBManagerTest {
             LocalDate.of(2024, 4, 13),
             LocalTime.of(10, 15),
             LocalDate.of(2024, 4, 16),
-            LocalTime.of(10, 15));
+            LocalTime.of(10, 15),
+            LocalDateTime.of(2023, 11, 13, 14, 12));
     Booking bookingThree = new Booking(
             2,
             4,
@@ -44,7 +47,8 @@ class BookingDBManagerTest {
             LocalDate.of(2024, 4, 13),
             LocalTime.of(10, 15),
             LocalDate.of(2024, 4, 16),
-            LocalTime.of(10, 15));
+            LocalTime.of(10, 15),
+            LocalDateTime.of(2023, 11, 13, 14, 12));
     {
         try {
             db = new TestDBConnector();
@@ -84,7 +88,8 @@ class BookingDBManagerTest {
                     LocalDate.of(2024, 4, 13),
                     LocalTime.of(10, 15),
                     LocalDate.of(2024, 4, 16),
-                    LocalTime.of(10, 15));
+                    LocalTime.of(10, 15),
+                    LocalDateTime.of(2023, 11, 13, 14, 12));
             bookingDBManager.addBooking(testBooking);
             ArrayList<Booking> testQuery = bookingDBManager.queryBookingsByUserID(3);
             assertNotNull(testQuery.get(0));

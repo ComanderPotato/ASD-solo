@@ -39,9 +39,37 @@ select {
     padding: 0 20rem;
 }
 .form-group {
-    gap: 1.8rem;
+    position: relative;
 }
 .form--booking-button {
     display: flex;
     justify-content: end;
+}
+.carPark-dropdown {
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    max-height: 200px;
+    overflow: scroll;
+    z-index: 2;
+    border-radius: 0.4rem;
+}
+.carPark-dropdown--item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    transition: 400ms ease-in-out all;
+    border-radius: 1rem;
+    margin: 0.4rem;
+    max-height: 4rem;
+}
+.carPark-dropdown--item:hover {
+    background-color: #efefef;
+}
+.carPark-dropdown--item > p, .carPark-dropdown--item > span {
+    user-select: none;
+    pointer-events: none;
 }

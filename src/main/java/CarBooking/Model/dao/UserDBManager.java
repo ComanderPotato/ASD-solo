@@ -1,7 +1,8 @@
 package CarBooking.Model.dao;
 
+import CarBooking.Controller.Formatter;
+import CarBooking.Controller.PasswordEncrypterDecrypter;
 import CarBooking.Model.User;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,16 +22,20 @@ public class UserDBManager {
         rs = prepStmt.executeQuery();
         ArrayList<User> users = new ArrayList<>();
         while(rs.next()) {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate dob = LocalDate.parse(rs.getString(7), format);
+            String decryptedPw = null;
+            try {
+                decryptedPw = PasswordEncrypterDecrypter.decrypt(rs.getString(4));
+            } catch (Exception e) {
+
+            }
             users.add(new User(
                     rs.getInt(1),
                     rs.getInt(2),
                     rs.getString(3),
-                    rs.getString(4),
+                    decryptedPw,
                     rs.getString(5),
                     rs.getString(6),
-                    dob,
+                    Formatter.parseDob(rs.getString(7)),
                     rs.getString(8),
                     rs.getBoolean(9)));
         }
@@ -44,18 +49,24 @@ public class UserDBManager {
 
         return rs.next() ? true : false;
     }
+    public boolean userExists(String email) throws SQLException {
+        prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE EMAIL = ?");
+        prepStmt.setString(1, email);
+        rs = prepStmt.executeQuery();
+        return rs.next() ? true : false;
+    }
     public void addUser(User user) throws SQLException {
         prepStmt = conn.prepareStatement("INSERT INTO USER " +
-                "(EMAIL, PASSWORD, FIRSTNAME, LASTNAME, DOB, PHONENUMBER)" +
-                "VALUES (?, ?, ?, ?, ?, ?)");
+                "(EMAIL, PASSWORD, FIRSTNAME, LASTNAME, DOB, PHONENUMBER, ISADMIN)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)");
         prepStmt.setString(1, user.getEmail());
         prepStmt.setString(2, user.getPassword());
         prepStmt.setString(3, user.getFirstName());
         prepStmt.setString(4, user.getLastName());
         prepStmt.setString(5, user.getDOBAsString());
         prepStmt.setString(6, user.getPhoneNumber());
+        prepStmt.setBoolean(7, user.isAdmin());
         prepStmt.executeUpdate();
-
     }
     public void deleteUser(int ID) throws SQLException {
         prepStmt = conn.prepareStatement("DELETE FROM USER WHERE ID = ?");
@@ -66,38 +77,37 @@ public class UserDBManager {
         prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE EMAIL = ? AND PASSWORD = ?");
         prepStmt.setString(1, email);
         prepStmt.setString(2, password);
-        rs = prepStmt.executeQuery();
-        if(rs.next()) {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate dob = LocalDate.parse(rs.getString(7), format);
-            return new User(
-                    rs.getInt(1),
-                    rs.getInt(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getString(5),
-                    rs.getString(6),
-                    dob,
-                    rs.getString(8),
-                    rs.getBoolean(9));
-        }
-        return null;
+
+        return getUser();
     }
     public User findUserByID(int ID) throws SQLException {
         prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE ID = ?");
         prepStmt.setInt(1, ID);
+        return getUser();
+    }
+
+    public User findUserByEmail(String email) throws SQLException {
+        prepStmt = conn.prepareStatement("SELECT * FROM USER WHERE email = ?");
+        prepStmt.setString(1, email);
+        return getUser();
+    }
+    private User getUser() throws SQLException {
         rs = prepStmt.executeQuery();
         if(rs.next()) {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate dob = LocalDate.parse(rs.getString(7), format);
+            String decryptedPw = null;
+            try {
+                decryptedPw = PasswordEncrypterDecrypter.decrypt(rs.getString(4));
+            } catch (Exception e) {
+
+            }
             return new User(
                     rs.getInt(1),
                     rs.getInt(2),
                     rs.getString(3),
-                    rs.getString(4),
+                    decryptedPw,
                     rs.getString(5),
                     rs.getString(6),
-                    dob,
+                    Formatter.parseDob(rs.getString(7)),
                     rs.getString(8),
                     rs.getBoolean(9));
         }
